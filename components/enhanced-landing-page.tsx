@@ -36,30 +36,34 @@ export function EnhancedLandingPageComponent() {
       { threshold: 0.5 }
     )
 
-    const detectionSection = document.getElementById('detection-capabilities')
+    const detectionSection = document.getElementById('detection-capabilities');
     if (detectionSection) {
-      observer.observe(detectionSection)
+      observer.observe(detectionSection);
     }
 
     return () => {
       if (detectionSection) {
-        observer.unobserve(detectionSection)
+        observer.unobserve(detectionSection);
       }
-    }
-  }, [])
+    };
+  }, []);
 
-  const animateCountUp = (setter, target, duration) => {
-    let startTimestamp = null
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1)
-      setter(Math.floor(progress * target))
+  const animateCountUp = (
+    setter: React.Dispatch<React.SetStateAction<number>>, // Typing setter
+    target: number,
+    duration: number
+  ) => {
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setter(Math.floor(progress * target));
       if (progress < 1) {
-        window.requestAnimationFrame(step)
+        window.requestAnimationFrame(step);
       }
-    }
-    window.requestAnimationFrame(step)
-  }
+    };
+    window.requestAnimationFrame(step);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
